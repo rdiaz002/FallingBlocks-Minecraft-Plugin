@@ -1,0 +1,11 @@
+name: fallingPlugs
+main: com.github.rdiaz002.fallingPlugs.fallingPlugs
+version: 1.0
+author: ronny34
+commands:
+  basic:
+   description: This is my basic command.
+   usage: /basic [player]
+   permission: PluginTut.basic
+   permission-message: You dont have <permission>
+  
