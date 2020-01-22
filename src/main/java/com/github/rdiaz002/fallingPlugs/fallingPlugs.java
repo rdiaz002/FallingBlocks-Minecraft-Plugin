@@ -53,8 +53,7 @@ public final class fallingPlugs extends JavaPlugin implements Listener {
 						for (int k = min_Z; k < max_Z; k++) {
 							Location loc = new Location(player.getWorld(), i + 0.5, j, k + 0.5);
 							Block fallingBlock = loc.getBlock();
-							if (fallingBlock.getType() != Material.AIR && fallingBlock.getType() != Material.BEDROCK
-									&& fallingBlock.getType() != Material.WATER && airBeneathBlock(loc)) {
+							if (allowedTypes(fallingBlock) && airBeneathBlock(loc)) {
 								MaterialData mat = new MaterialData(loc.getBlock().getType());
 								fallingBlock.setType(Material.AIR); // Deletes the block
 								player.getWorld().spawnFallingBlock(loc, mat); // creates new falling block of the
@@ -82,6 +81,14 @@ public final class fallingPlugs extends JavaPlugin implements Listener {
 	public boolean airBeneathBlock(Location loc) {
 		Location temp = new Location(loc.getWorld(), loc.getX(), loc.getY() - 1, loc.getZ());
 		if (temp.getBlock().getType() == Material.AIR) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean allowedTypes(Block bloc) {
+		if (bloc.getType() != Material.AIR && bloc.getType() != Material.BEDROCK
+				&& bloc.getType() != Material.WATER && bloc.getType()!=Material.OBSIDIAN && bloc.getType()!=Material.LAVA) {
 			return true;
 		}
 		return false;
